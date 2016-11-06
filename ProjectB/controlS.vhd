@@ -27,11 +27,11 @@ entity controlS is
 		BAluSel		: out std_logic;
 		BZero		: out std_logic;
 		AndLinkR31	: out std_logic;
-		RegDataSel	: out std_logic;
+		RegDataSel	: out std_logic_vector(1 downto 0);
 		ReturnSel	: out std_logic;
 		ZSel		: out std_logic;
 		LSel		: out std_logic_vector(1 downto 0);
-		-- LWSel		: out std_logic_vector(1 downto 0);
+		SWSel		: out std_logic_vector(1 downto 0);
 		-- ShamtSel	: out std_logic;
         OutSel      : out std_logic_vector(1 downto 0)
 		);
@@ -40,7 +40,7 @@ end controlS;
 architecture mix of controlS is
 	
 begin
-    process(i_CLK)
+    process(opCode, funct, rt)
     begin
     case opCode is
 			when "000000" =>		--    R type
@@ -60,10 +60,10 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
-					elsif (funct = "001000") then
+					elsif (funct = "001000") then -- jr
 							RegDst     	<= '1';
 							ALUSrc		<= '0';
 							MemtoReg    <= '0';
@@ -79,10 +79,10 @@ begin
 							ReturnSel	<= '1';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
-					elsif (funct = "001001") then
+					elsif (funct = "001001") then -- jalr
 							RegDst     	<= '1';
 							ALUSrc		<= '0';
 							MemtoReg    <= '0';
@@ -94,11 +94,11 @@ begin
 							BAluSel		<= '0';
 							BZero		<= '0';
 							AndLinkR31	<= '0';
-							RegDataSel	<= "00";
-							ReturnSel	<= '0';
+							RegDataSel	<= "01";
+							ReturnSel	<= '1';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
 					else
@@ -117,7 +117,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "10";
 					end if;
@@ -137,7 +137,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "001001" => -- addiu
@@ -156,7 +156,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "001100" => -- andi
@@ -175,7 +175,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "001101" => -- ori
@@ -194,7 +194,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "001110" => -- 0ori
@@ -213,7 +213,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "001111" => -- lui
@@ -232,7 +232,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "001010" => -- slti
@@ -251,7 +251,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "001011" => -- sltiu
@@ -270,7 +270,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "000100" => -- beq
@@ -289,7 +289,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "000101" => -- bne
@@ -308,7 +308,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "000001" => 
@@ -328,7 +328,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
 					elsif (rt = "10001") then -- bgezal
@@ -347,7 +347,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
 					elsif (rt = "10000") then -- bltzal
@@ -366,7 +366,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
 					elsif (rt = "00000") then -- bltz
@@ -385,7 +385,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
 					end if;
@@ -405,7 +405,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "000110" => -- blez
@@ -424,7 +424,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "100011" => -- lw
@@ -443,7 +443,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "10";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "100000" => -- lb
@@ -462,7 +462,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '1';
 							LSel		<= "01";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "100001" => -- lh
@@ -481,7 +481,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '1';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "100100" => -- lbu
@@ -500,7 +500,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "01";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "100101" => -- lhu
@@ -519,7 +519,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "101011" => -- sw
@@ -538,7 +538,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "101000" => -- sb
@@ -557,7 +557,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "10";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "101001" => -- sh
@@ -576,7 +576,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "11";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "000010" => -- j
@@ -595,7 +595,7 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when "000011" => -- jal
@@ -614,13 +614,10 @@ begin
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "00";
-							-- LWSel	<=
+							SWSel		<= "00";
 							-- ShamtSel	<=
 							OutSel      <= "00";
            when others => null;
         end case;
     end process;
-    
-      
- 
-end mi0;
+end mix;
