@@ -14,8 +14,8 @@ use IEEE.numeric_std.all;
 entity controlS is
   port (
         opCode     	: in std_logic_vector(5 downto 0);
-	funct		: in std_logic_vector(5 downto 0);
-	rt			: in std_logic_vector(4 downto 0);
+		funct		: in std_logic_vector(5 downto 0);
+		rt			: in std_logic_vector(4 downto 0);
         RegDst     	: out std_logic;
 		ALUSrc		: out std_logic;
         MemtoReg    : out std_logic;
