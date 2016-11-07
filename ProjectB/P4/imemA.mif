@@ -1,0 +1,103 @@
+DEPTH=1024; 	% Memory depth and width are required 
+		% DEPTH is the number of addresses 
+WIDTH = 32; 	% WIDTH is the number of bits of data per word
+		% DEPTH and WIDTH should be entered as decimal numbers
+
+ADDRESS_RADIX = DEC; 	% Address and value radixes are required
+DATA_RADIX = HEX; 	% Enter BIN, DEC, HEX, OCT, or UNS; unless
+			% otherwise specified, radixes = HEX
+
+-- Specify values for addresses, which can be single address or range
+-- SOME THINGS TO CONSIDER
+-- 1) This memory is word-addressable, versus the MIPS conceptual byte-addressable memory.
+--    This means that address 1 corresponds to word 1, address 2 corresponds to word 2, etc.
+--    Since MIPS will be generating byte addresses, you will have to create some (very simple)
+--    logic in your VHDL wrapper to deal with byte/word offsets. 
+-- 2) The "single address" notation seems to be least likely to cause confusion so that is what
+--    I recommend. 
+-- 3) The values need to be in 32-bit hex form (i.e. don't use F when you really mean 0000000F).
+
+CONTENT
+BEGIN
+
+--addi $1, $0, 2
+0 : 20010002;
+--addiu $1, $0, 2
+1 : 24010002;
+--addi $1, $0, 2
+2 : 20010002;
+--add $1, $1, $0
+3 : 00210020;
+--add $1, $1, $0
+4 : 00200820;
+--addu $1, $1, $0
+5 : 00200821;
+--addi $2, $0, 5
+6 : 20020005;
+--sub $1, $2, $1
+7 : 00410822;
+--subu $1, $2, $1
+8 : 00410823;
+--addi $1, $0, 1
+9 : 20010001;
+--addi $2, $0, 2
+10 : 20020002;
+--and $3, $1, $2  reg3 would be 0
+11 : 00221824;
+--or $3, $1, $2 reg3 would be 3
+12 : 00221825;
+--nor $3, $1, $2 reg3 would be 00
+13 : 00221827;
+--xor $3, $1, $2 reg3 = 11
+14 : 00221826;
+--slt $3, $1, $2 reg3 = 1
+15 : 0022182A;
+--sltu $3, $2, $1 reg3 = 0
+16 : 0041182B;
+--mul $3, $2, $1 reg3 = 2
+17 : 70221802;
+--addi $2, $0, 1110 0000 0000 0011 $2 = 1110000....11
+18 : 2002E003;
+
+--sra $3, $2, 1  reg2 >> 1  reg3 = 11110...01
+19 : 00021843;
+--srl $3, $2, 1  reg2 >>> 1 reg3 = 0111000...01
+20 : 00021842;
+--sll $3, $2, 1 reg3 = 11000...110
+20 : 00021840;
+--sllv $3, $2, $1 reg3 = 11000...110
+21 : 00221804;
+--srav $3, $2, $1 reg3 = 111100...01
+22 : 00221807;
+--srlv $3, $2, $1 reg3 = 011100...01
+23 : 00221806;
+--addi $2, $0, 27
+24 : 2002001B;
+--jr $2
+25 : 00400008;
+--addi $2, $0, 5
+26 : 20020005;
+--addi $2, $0, 2 
+27 : 20020002;
+--addi $2, $2, 29 reg2 = 31
+28 : 2042001D;
+--jalr $2, $3 reg3 = 32
+29 : 00401809;
+--addi $2, $0, 5
+30 : 20020005;
+--addi $2, $0, 6
+31 : 20020006;
+--add $3, $3, $2 reg3 = 38
+32 : 00621820;
+
+
+
+[20..48] : ffFFffFF; 			
+
+END;
+
+
+
+
+
+
