@@ -1,10 +1,3 @@
--- control.vhd: CprE 381 F13 template file
--- 
--- The main control unit of MIPS
--- 
--- Note: This is a partial example, with nine control signals (no Jump
--- singal)
-
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
