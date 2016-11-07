@@ -51,7 +51,7 @@ architecture behavior of tb_control is
   
 begin
   
-  DUT: controlS 
+  DUT: MIPS_App2 
   port map(s_opCode, s_funct, s_rt, s_RegDst, s_ALUSrc, s_MemtoReg, s_RegWrite, s_MemWrite,
   s_Branch, s_Jump, s_ALUOp, s_BAluSel, s_BZero, s_AndLinkR31, s_RegDataSel, s_ReturnSel, s_ZSel,
   s_LSel, s_SWSel, s_ShamtSel, s_ShiftSel, s_OutSel);
