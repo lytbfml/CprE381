@@ -30,10 +30,9 @@ entity controlS is
 		RegDataSel	: out std_logic_vector(1 downto 0);
 		ReturnSel	: out std_logic;
 		ZSel		: out std_logic;
-		LSel		: ou10std_logic_vector(1 downto 0);
+		LSel		: out std_logic_vector(1 downto 0);
 		SWSel		: out std_logic_vector(1 downto 0);
-		ShamtSel	: out s
-							ShiftSel	<= "10";td_logic;
+		ShamtSel	: out std_logic;
 		ShiftSel	: out std_logic_vector(1 downto 0);
         OutSel      : out std_logic_vector(1 downto 0)
 		);
@@ -45,7 +44,7 @@ begin
     process(opCode, funct, rt)
     begin
     case opCode is
-			when "011100" +> -- mul
+			when "011100" => -- mul
 					RegDst     	<= '1';
 					ALUSrc		<= '0';
 					MemtoReg    <= '0';
@@ -93,7 +92,7 @@ begin
 							RegWrite   	<= '1';
 							MemWrite   	<= '0';
 							Branch      <= '0';
-							Jump		<= '0';
+							Jump		<= '1';
 							ALUOp	    <= "000";
 							BAluSel		<= '0';
 							BZero		<= '0';
@@ -113,7 +112,7 @@ begin
 							RegWrite   	<= '1';
 							MemWrite   	<= '0';
 							Branch      <= '0';
-							Jump		<= '0';
+							Jump		<= '1';
 							ALUOp	    <= "000";
 							BAluSel		<= '0';
 							BZero		<= '0';
@@ -138,8 +137,8 @@ begin
 							BAluSel		<= '0';
 							BZero		<= '0';
 							AndLinkR31	<= '0';
-							RegDataSel	<= "01";
-							ReturnSel	<= '1';
+							RegDataSel	<= "00";
+							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "10";
 							SWSel		<= "00";
@@ -158,8 +157,8 @@ begin
 							BAluSel		<= '0';
 							BZero		<= '0';
 							AndLinkR31	<= '0';
-							RegDataSel	<= "01";
-							ReturnSel	<= '1';
+							RegDataSel	<= "00";
+							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "10";
 							SWSel		<= "00";
@@ -178,8 +177,8 @@ begin
 							BAluSel		<= '0';
 							BZero		<= '0';
 							AndLinkR31	<= '0';
-							RegDataSel	<= "01";
-							ReturnSel	<= '1';
+							RegDataSel	<= "00";
+							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "10";
 							SWSel		<= "00";
@@ -198,12 +197,12 @@ begin
 							BAluSel		<= '0';
 							BZero		<= '0';
 							AndLinkR31	<= '0';
-							RegDataSel	<= "01";
-							ReturnSel	<= '1';
+							RegDataSel	<= "00";
+							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "10";
 							SWSel		<= "00";
-							ShamtSel	<= '1';
+							ShamtSel	<= '0';
 							ShiftSel	<= "01";
 							OutSel      <= "10";
 					elsif (funct = "000010") then -- srl
@@ -218,12 +217,12 @@ begin
 							BAluSel		<= '0';
 							BZero		<= '0';
 							AndLinkR31	<= '0';
-							RegDataSel	<= "01";
-							ReturnSel	<= '1';
+							RegDataSel	<= "00";
+							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "10";
 							SWSel		<= "00";
-							ShamtSel	<= '1';
+							ShamtSel	<= '0';
 							ShiftSel	<= "00";
 							OutSel      <= "10";
 					elsif (funct = "000000") then -- sll
@@ -741,7 +740,7 @@ begin
 							BAluSel		<= '0';
 							BZero		<= '0';
 							AndLinkR31	<= '0';
-							RegDataSel	<= "01";
+							RegDataSel	<= "00";
 							ReturnSel	<= '0';
 							ZSel		<= '0';
 							LSel		<= "10";

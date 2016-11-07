@@ -73,17 +73,233 @@ begin
     wait for gCLK_HPER;
     
     s_opCode     <= "000000";
+    s_funct      <= "100000";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    
+    s_opCode     <= "000000";
+    s_funct      <= "100001";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    s_opCode     <= "000000";
+    s_funct      <= "100010";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    s_opCode     <= "000000";
+    s_funct      <= "100011";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    s_opCode     <= "000000";
+    s_funct      <= "100100";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    s_opCode     <= "000000";
+    s_funct      <= "100101";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    s_opCode     <= "000000";
+    s_funct      <= "100110";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    s_opCode     <= "000000";
+    s_funct      <= "100111";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    s_opCode     <= "000000";
+    s_funct      <= "101010";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    s_opCode     <= "000000";
+    s_funct      <= "101011";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    --mul
+    s_opCode     <= "011100";
+    s_funct      <= "000010";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    --sra
+    s_opCode     <= "000000";
+    s_funct      <= "000011";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    s_opCode     <= "000000";
+    s_funct      <= "000010";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    s_opCode     <= "000000";
     s_funct      <= "000000";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    s_opCode     <= "000000";
+    s_funct      <= "000100";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    s_opCode     <= "000000";
+    s_funct      <= "000111";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    --srlv
+    s_opCode     <= "000000";
+    s_funct      <= "000110";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    s_opCode     <= "000000";
+    s_funct      <= "001000";
     s_rt         <= "00000";
     wait for cCLK_PER;
-    
-    s_addSub     <= '1';
-    s_funct      <= "0101";
-    s_rd         <= "00001";
-    s_rs         <= "11011";
+    --jalr
+    s_opCode     <= "000000";
+    s_funct      <= "001001";
+    s_rt         <= "00000";
+    wait for cCLK_PER;
+    --addi
+    s_opCode     <= "001000";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    --addiu
+    s_opCode     <= "001001";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    --andi
+    s_opCode     <= "001100";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    --ori
+    s_opCode     <= "001101";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    --xori
+    s_opCode     <= "001110";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    --lui
+    s_opCode     <= "001111";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    --slti
+    s_opCode     <= "001010";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    --sltiu
+    s_opCode     <= "001011";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    --beq
+    s_opCode     <= "000100";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    --bne
+    s_opCode     <= "000101";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    --bgez
+    s_opCode     <= "000001";
+    s_funct      <= "XXXXXX";
     s_rt         <= "00001";
     wait for cCLK_PER;
-    
+    --bgezal
+    s_opCode     <= "000001";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "10001";
+    wait for cCLK_PER;
+    --bgtz
+    s_opCode     <= "000111";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "00000";
+    wait for cCLK_PER;
+    --blez
+    s_opCode     <= "000110";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "00000";
+    wait for cCLK_PER;
+    --bltzal
+    s_opCode     <= "000001";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "10000";
+    wait for cCLK_PER;
+    --bltz
+    s_opCode     <= "000001";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "00000";
+    wait for cCLK_PER;
+    --lw
+    s_opCode     <= "100011";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    s_opCode     <= "100000";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    s_opCode     <= "100001";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    s_opCode     <= "100100";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+    s_opCode     <= "100101";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    --sw
+    s_opCode     <= "101011";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    --sb
+    s_opCode     <= "101000";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    --sh
+    s_opCode     <= "101001";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    --j
+    s_opCode     <= "000010";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+    --jal
+    s_opCode     <= "000011";
+    s_funct      <= "XXXXXX";
+    s_rt         <= "XXXXX";
+    wait for cCLK_PER;
+
+
+
     wait;
   end process;
   
